@@ -79,7 +79,7 @@
 #' @param dropdownMenu List of items in the boxtool dropdown menu. Use \link{boxDropdown}.
 #' @param sidebar Slot for \link{boxSidebar}.
 #' @param id Box unique id. \link{updateBox} target.
-#'
+#' @param class A class to applied to the top level div
 #' @rdname box
 #' @family cards
 #'
@@ -157,7 +157,8 @@ bs4Card <- function(...,
                     label = NULL,
                     dropdownMenu = NULL,
                     sidebar = NULL,
-                    id = NULL) {
+                    id = NULL,
+                    class = NULL) {
   
 
   if (is.null(status)) solidHeader <- TRUE
@@ -211,7 +212,7 @@ bs4Card <- function(...,
   )
 
   # set card class
-  cardCl <- setBoxClass(
+  cardCl <- paste(setBoxClass(
     status, 
     solidHeader, 
     collapsible, 
@@ -220,7 +221,7 @@ bs4Card <- function(...,
     gradient, 
     background, 
     sidebar
-  )
+  ), class)
 
   # set style
   style <- setBoxStyle(height, sidebar)

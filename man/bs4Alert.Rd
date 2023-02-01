@@ -4,7 +4,7 @@
 \alias{bs4Alert}
 \title{Bootstrap 4 Alert box}
 \usage{
-bs4Alert(..., status = "primary", style = NULL, id = NULL, width = 6)
+bs4Alert(..., status = NULL, class = NULL, style = NULL, id = NULL, width = 6)
 }
 \arguments{
 \item{...}{Contents of the box.}
@@ -33,6 +33,8 @@ bs4Alert(..., status = "primary", style = NULL, id = NULL, width = 6)
   \item \code{teal}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#39cccc")}.
   \item \code{olive}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3d9970")}.
 }}
+
+\item{class}{A class to applied to the top level div}
 
 \item{style}{\code{(character)} Inline style parameters to add}
 

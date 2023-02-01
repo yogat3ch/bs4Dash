@@ -8,26 +8,36 @@
 \alias{accordionItem}
 \title{Bootstrap 4 accordion container}
 \usage{
-bs4Accordion(..., id, width = 12, collapse_all = TRUE)
+bs4Accordion(..., id, class = NULL, width = 12, collapse_all = TRUE)
 
 bs4AccordionItem(
   ...,
   title,
   status = NULL,
+  class = NULL,
   collapsed = TRUE,
   solidHeader = TRUE
 )
 
 updateAccordion(id, selected, session = shiny::getDefaultReactiveDomain())
 
-accordion(..., id, width = 12, collapse_all = TRUE)
+accordion(..., id, class = NULL, width = 12, collapse_all = TRUE)
 
-accordionItem(..., title, status = NULL, collapsed = TRUE, solidHeader = TRUE)
+accordionItem(
+  ...,
+  title,
+  status = NULL,
+  class = NULL,
+  collapsed = TRUE,
+  solidHeader = TRUE
+)
 }
 \arguments{
 \item{...}{slot for \link{accordionItem}.}
 
 \item{id}{Accordion to target.}
+
+\item{class}{Class applied to the accordion div}
 
 \item{width}{The width of the accordion.}
 

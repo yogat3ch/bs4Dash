@@ -63,9 +63,13 @@ bs4Badge <- function(..., color, position = c("left", "right"),
 #' @inherit bs4Card params
 #' @export
 
-bs4Alert <- function(..., status = "primary", style = NULL, id = NULL, width = 6) {
-  bs4Dash:::validateStatus(status)
-  shiny::tags$div(class = paste0("alert alert-",status), role = "alert", ..., style = paste0("margin: 6px 5px 6px 15px;", sapply(\(x) {ifelse(grepl(";$", x), x, paste0(x, ";"))}), id = id))
+bs4Alert <- function(..., status = NULL, class = NULL, style = NULL, id = NULL, width = 6) {
+  class <- c("alert", class)
+  if (!is.null(status)) {
+    bs4Dash:::validateStatus(status)
+    class <- c(class, paste0("alert-", status))
+  }
+  shiny::tags$div(class = paste(class, collapse = " "), role = "alert", ..., style = paste0("margin: 6px 5px 6px 15px;", sapply(\(x) {ifelse(grepl(";$", x), x, paste0(x, ";"))}), id = id))
 }
 
 
@@ -76,6 +80,7 @@ bs4Alert <- function(..., status = "primary", style = NULL, id = NULL, width = 6
 #'
 #' @param ... slot for \link{accordionItem}.
 #' @param id Unique accordion id.
+#' @param class Class applied to the accordion div
 #' @param width The width of the accordion.
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
@@ -129,7 +134,7 @@ bs4Alert <- function(..., status = "primary", style = NULL, id = NULL, width = 6
 #' }
 #'
 #' @export
-bs4Accordion <- function(..., id, width = 12, collapse_all = TRUE) {
+bs4Accordion <- function(..., id, class = NULL, width = 12, collapse_all = TRUE) {
   
   items <- list(...)
   if (collapse_all) {
@@ -151,7 +156,7 @@ bs4Accordion <- function(..., id, width = 12, collapse_all = TRUE) {
   shiny::tags$div(
     class = if (!is.null(width)) paste0("col-sm-", width),
     shiny::tags$div(
-      class = "accordion",
+      class = paste("accordion", class),
       id = id,
       items
     )
@@ -168,19 +173,20 @@ bs4Accordion <- function(..., id, width = 12, collapse_all = TRUE) {
 #' @rdname accordion
 #'
 #' @export
-bs4AccordionItem <- function(..., title, status = NULL, 
+bs4AccordionItem <- function(..., title, status = NULL, class = NULL, 
                              collapsed = TRUE, solidHeader = TRUE) {
   
-  cl <- "card"
+  cl <- c("card", class)
   if (!is.null(status)) {
     validateStatusPlus(status)
-    cl <- paste0(cl, " card-", status)
+    cl <- c(cl, paste0("card-", status))
+    
   }
   
-  if (!solidHeader) cl <- paste0(cl, " card-outline")
+  if (!solidHeader) cl <- c(cl, "card-outline")
   
   shiny::tags$div(
-    class = cl,
+    class = paste(cl, collapse = " "),
     
     # box header
     shiny::tags$div(

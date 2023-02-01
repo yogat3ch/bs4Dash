@@ -45,7 +45,8 @@ bs4Card(
   label = NULL,
   dropdownMenu = NULL,
   sidebar = NULL,
-  id = NULL
+  id = NULL,
+  class = NULL
 )
 
 updatebs4Card(
@@ -77,7 +78,8 @@ box(
   label = NULL,
   dropdownMenu = NULL,
   sidebar = NULL,
-  id = NULL
+  id = NULL,
+  class = NULL
 )
 
 updateCard(
@@ -259,6 +261,8 @@ TRUE by default}
 \item{sidebar}{Slot for \link{boxSidebar}.}
 
 \item{id}{Card id.}
+
+\item{class}{A class to applied to the top level div}
 
 \item{action}{Action to trigger: \code{c("remove", "toggle", "toggleMaximize", "restore", "update")}.}
 
