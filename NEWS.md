@@ -1,3 +1,5 @@
+# bs4Dash 2.2.2
+
 # bs4Dash 2.2.1
 
 ## New features
