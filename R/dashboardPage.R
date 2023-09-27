@@ -174,7 +174,8 @@ bs4DashPage <- function(header, sidebar, body, controlbar = NULL, footer = NULL,
         content = "width=device-width, initial-scale=1"
       ),
       shiny::tags$meta(`http-equiv` = "x-ua-compatible", content = "ie=edge"),
-      shiny::tags$title(title)
+      if (!is.null(title))
+        shiny::tags$title(title)
     ),
     # Body
     add_bs4Dash_deps(
