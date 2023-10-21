@@ -69,7 +69,7 @@ bs4Alert <- function(..., status = NULL, class = NULL, style = NULL, id = NULL, 
     bs4Dash:::validateStatus(status)
     class <- c(class, paste0("alert-", status))
   }
-  htmltools::tags$div(class = paste(class, collapse = " "), role = "alert", ..., style = paste0("margin: 6px 5px 6px 15px;", sapply(style, \(x) {ifelse(grepl(";$", x), x, paste0(x, ";"))}), id = id))
+  htmltools::tags$div(class = paste(class, collapse = " "), role = "alert", ..., style = paste0("margin: 6px 5px 6px 15px;", sapply(style, \(x) {ifelse(grepl(";$", x), x, paste0(x, ";"))})), id = id)
 }
 
 
