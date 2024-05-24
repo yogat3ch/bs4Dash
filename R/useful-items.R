@@ -82,6 +82,7 @@ bs4Alert <- function(..., status = NULL, class = NULL, style = NULL, id = NULL, 
 #' @param id Unique accordion id.
 #' @param class Class applied to the accordion div
 #' @param width The width of the accordion.
+#' @param .list To pass \link{accordionItem} within a list.
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #' @rdname accordion
@@ -125,11 +126,30 @@ bs4Alert <- function(..., status = NULL, class = NULL, style = NULL, id = NULL, 
 #'           collapsed = FALSE,
 #'           "This is some text!"
 #'         )
-#'       )
+#'       ),
+#'       accordion(
+#'         id = "accordion_dynamic",
+#'         .list = lapply(
+#'           1:2,
+#'           function(i)
+#'             accordionItem(
+#'               title = paste('Accordion 1 Item', i),
+#'               status = "danger",
+#'               collapsed = ifelse (i == 1, TRUE, FALSE),
+#'               "This is some text!"
+#'             )
+#'          )
+#'        )
 #'     ),
 #'     title = "Accordion"
 #'   ),
-#'   server = function(input, output) { }
+#'   server = function(input, output) {
+#'    observe({
+#'      print(input$accordion1)
+#'      print(input$accordion2)
+#'      print(input$accordion_dynamic)
+#'    })
+#'   }
 #'  )
 #' }
 #'
@@ -2703,8 +2723,6 @@ bs4Sortable <- function(..., width = 12) {
 #'
 #' @param data Expect dataframe, tibble or list of shiny tags... See examples. 
 #' @param cardWrap Whether to wrap the table in a card. FALSE by default.
-#' @param headTitles Table header names. Must have the same length as the number of 
-#' \link{bs4TableItem} in \link{bs4TableItems}. Set "" to have an empty title field.
 #' @param bordered Whether to display border between elements. FALSE by default.
 #' @param striped Whether to displayed striped in elements. FALSE by default.
 #' @param width Table width. 12 by default.
