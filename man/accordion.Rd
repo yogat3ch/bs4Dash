@@ -41,6 +41,8 @@ accordionItem(
 
 \item{width}{The width of the accordion.}
 
+\item{.list}{To pass \link{accordionItem} within a list.}
+
 \item{title}{Optional title.}
 
 \item{status}{The status of the item. This determines the item's background
@@ -124,11 +126,30 @@ if (interactive()) {
           collapsed = FALSE,
           "This is some text!"
         )
-      )
+      ),
+      accordion(
+        id = "accordion_dynamic",
+        .list = lapply(
+          1:2,
+          function(i)
+            accordionItem(
+              title = paste('Accordion 1 Item', i),
+              status = "danger",
+              collapsed = ifelse (i == 1, TRUE, FALSE),
+              "This is some text!"
+            )
+         )
+       )
     ),
     title = "Accordion"
   ),
-  server = function(input, output) { }
+  server = function(input, output) {
+   observe({
+     print(input$accordion1)
+     print(input$accordion2)
+     print(input$accordion_dynamic)
+   })
+  }
  )
 }
 

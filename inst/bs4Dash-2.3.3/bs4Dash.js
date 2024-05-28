@@ -932,7 +932,7 @@ $(function () {
         break;
       default: console.warn(`${config.status} does not belong to allowed statuses!`)
     }
-
+    
     closeButton = '';
 
     if (config.closable) {
@@ -1371,7 +1371,8 @@ $(function () {
 
 
   // tooltip/popover toggle
-  if ($('body').attr('data-help') == 1) {
+  if ($('body').attr('data-help') == 2 || 
+    $('body').attr('data-help') == 1) {
     var $help_switch_checkbox = $('<input />', {
       type: 'checkbox',
       id: 'help_switch',
@@ -1399,7 +1400,15 @@ $(function () {
     }
 
     // trigger first click, if necessary
-    $help_switch_checkbox.click();
+      $(document).on('shiny:connected', function() {
+        if ($('body').attr('data-help') == 2 || $('body').attr('data-help') == 1) {
+          $help_switch_checkbox.click(); 
+          // Click again if option is set to FALSE
+          if ($('body').attr('data-help') == 1) {
+            $help_switch_checkbox.click(); 
+          }
+        }
+      }); 
   }
 
   // dark mode input
@@ -1488,7 +1497,7 @@ $(function () {
   $('body').attr('data-dark') == 1) {
     var $dark_mode_checkbox = $('<input />', {
       type: 'checkbox',
-      id: 'customSwitch1',
+      id: 'theme_switch',
       class: 'custom-control-input'
     }).on('click', function () {
 
@@ -1600,7 +1609,7 @@ $(function () {
     });
 
     var $dark_mode_icon = $('body').hasClass('dark-mode') ? '<i class="dark-theme-icon fa fa-moon"></i>' : '<i class="dark-theme-icon fa fa-sun"></i>';
-    var $dark_mode_container = $('<div />', { class: 'custom-control custom-switch mx-2 mt-2' }).append($dark_mode_checkbox).append(`<label class="custom-control-label" for="customSwitch1">${$dark_mode_icon}</label>`);
+    var $dark_mode_container = $('<div />', { class: 'custom-control custom-switch mx-2 mt-2' }).append($dark_mode_checkbox).append(`<label class="custom-control-label" for="theme_switch">${$dark_mode_icon}</label>`);
     
     // insert before $('#controlbar-toggle') whenever possible ...
     if ($('.nav-item #controlbar-toggle')) {
@@ -1613,7 +1622,7 @@ $(function () {
     // Trigger dark mode
     if ($('body').attr('data-dark') == 2) {
       $(document).on('shiny:connected', function() {
-        $('#customSwitch1').click();
+        $dark_mode_checkbox.click();
       }); 
     }
   }
